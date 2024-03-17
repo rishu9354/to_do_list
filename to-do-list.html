@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>To-Do-List</title>
+	<style>
+		.container{
+			
+			margin: 50px auto;
+			text-align: center;
+			background-color:grey;
+			width:50%;
+			height:500px;
+			border-radius: 10px;
+			border: 3px solid black;
+			color: black;
+		}
+		.input-content{
+			text-align: center;
+			margin-top:20px;
+			font-size: 25px;
+			font-weight: bold;
+
+		}
+	
+		input[type="text"]{
+			width:60%;
+			padding: 10px;
+			margin-bottom:10px;
+		}
+		.btn{
+			padding: 10px 20px;
+			background-color:#4caf50;
+			border: none;
+			border-radius:5px;
+			cursor: pointer;
+		}
+		.btn:hover{
+			background-color:#45a049;
+		}
+		.completed{
+			text-decoration: line-through;
+		}
+		li{
+/*			list-style-type: none;			*/
+			margin-bottom: 10px;
+		}
+		li span{
+			margin-right: 5px;
+		}
+	</style>
+
+</head>
+<body>
+	<div class="container">
+		<h2>To-Do-List</h2>
+		<ul id="addTask">
+			
+		</ul>
+	</div>
+
+	<div class="input-content">
+		Add anything in list: <input type="text" id="add-list">
+		<button id="addBtn" class="btn">Add Task</button>
+	</div>
+
+	<script>
+		// let content=document.getElementById("add-list").value;
+		document.getElementById("addBtn").onclick=function(){
+			// console.log(content);
+			// document.getElementById("addTask").innerHTML=content;
+
+			let content=document.getElementById("add-list");
+			let taskText=content.value.trim();
+
+			if(taskText === ""){
+				alert("Please enter a task!");
+				return;
+			}
+
+			var addTask=document.getElementById("addTask");
+			// create element using js
+			var taskList= document.createElement("li");
+			var taskSpan=document.createElement("span");
+			// textContent is a DOM string
+			// textContent means particaluar element ke andar kuch bhi name dena or value output karwana 
+			taskSpan.textContent=taskText;
+			taskList.appendChild(taskSpan);
+			// crerate button using js
+			var completeBtn=document.createElement("button");
+			completeBtn.textContent="Complete";
+			completeBtn.onclick=function(){
+				taskSpan.classList.toggle("completed");
+			};
+			taskList.appendChild(completeBtn);
+			// crerate button using js
+
+			var deleteBtn=document.createElement("button");
+			deleteBtn.textContent="Delete";
+			deleteBtn.onclick=function(){
+				taskList.remove();
+			};
+			taskList.appendChild(deleteBtn);
+			addTask.appendChild(taskList);
+			content.value="";
+
+		}
+	</script>
+</body>
+</html>
